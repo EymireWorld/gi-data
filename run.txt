@@ -1,0 +1,5 @@
+# prod
+gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 127.0.0.1:8080
+
+# dev
+uvicorn app.main:app --workers 1 --host 127.0.0.1 --port 8080
