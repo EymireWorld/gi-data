@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Enum, Float, Integer, SmallInteger, String
-from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.dialects.postgresql import ARRAY as Array
 
 from app.database import Base
 from app.schemas import WeaponType
@@ -17,5 +17,5 @@ class Weapon(Base):
     substat_name = Column(Enum(WeaponSubstatType))
     substat_value = Column(Float)
     affix_name = Column(String)
-    affix_description = Column(ARRAY(String))
+    affix_description = Column(Array(String))
     description = Column(String)
