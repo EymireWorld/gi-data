@@ -7,7 +7,7 @@ from .schemas import WeaponCreate as WeaponCreateSchema, WeaponUpdate as WeaponU
 
 async def create_weapon(data: WeaponCreateSchema, db: AsyncSession):
     result = await db.execute(
-        insert(WeaponModel).values(data.model_dump()).returning(WeaponModel)
+        insert(WeaponModel).values(data.model_dump(exclude_unset = True)).returning(WeaponModel)
     )
     await db.commit()
 
@@ -32,7 +32,8 @@ async def get_weapon(weapon_id: int, db: AsyncSession):
 
 async def update_weapon(weapon_id: int, data: WeaponUpdateSchema, db: AsyncSession):
     result = await db.execute(
-        update(WeaponModel).where(WeaponModel.id == weapon_id).values(data.model_dump(exclude_unset = True)).returning(WeaponModel)
+        update(WeaponModel).where(WeaponModel.id == weapon_id).values(data.model_dump(exclude_unset = True)).returning(
+            WeaponModel)
     )
     await db.commit()
 
